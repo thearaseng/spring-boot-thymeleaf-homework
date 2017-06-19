@@ -15,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
+import com.kshrd.spring.data.Database;
+
 @Configuration
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
@@ -27,6 +29,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/static/");
+	}
+	
+	@Bean
+	public Database database(){
+		return new Database();
 	}
 	
 	@Bean
