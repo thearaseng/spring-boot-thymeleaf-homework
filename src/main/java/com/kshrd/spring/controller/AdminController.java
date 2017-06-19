@@ -8,7 +8,7 @@ public class AdminController {
 	
 	@RequestMapping("/admin/dashboard")
 	public String adminDashboard(){
-		return "admin/admin-layout";
+		return "admin/dashboard";
 	}
 	
 }
