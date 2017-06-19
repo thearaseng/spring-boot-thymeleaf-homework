@@ -9,7 +9,7 @@ import com.kshrd.spring.model.User;
 import com.kshrd.spring.repository.UserRepository;
 
 @Service
-public class UserService implements com.kshrd.spring.service.UserService {
+public class UserServiceImpl implements com.kshrd.spring.service.UserService {
 
 	@Autowired
 	private UserRepository userRepository;

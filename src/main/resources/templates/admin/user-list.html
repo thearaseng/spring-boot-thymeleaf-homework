@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="bootstrap-layout"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="/admin/admin-layout">
+
+<body>
+
+<div layout:fragment="content">
+
+<ol class="breadcrumb">
+  <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
+  <li class="active"><a th:href="@{/admin/user-list}">Users</a></li>
+</ol>
+
+<div class="card">
+  <div class="card-header bg-white center">
+    <h5 class="card-title">Total Users <span class="text-primary" th:text="${USERS.size()}"></span></h5>
+  </div>
+  <table class="table table-striped m-b-0">
+    <thead>
+      <tr class="text-uppercase small">
+        <th>Profile</th>
+        <th>Id</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="user : ${USERS}">
+        <td>
+          <div class="media">
+            <div class="media-left">
+              <img th:src="@{/resources/img/} + ${user.profile}" alt="" width="80" class="img-rounded">
+            </div>
+            <div class="media-body media-middle" th:text="${user.name}"></div>
+          </div>
+        </td>
+        <td class="center vertical-middle">
+          <span class="text-orange bold" th:text="${user.id}"></span>
+        </td>
+        <td class="center vertical-middle">
+          <span class="text-orange bold" th:text="${user.role}"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+</body>
+
+</html>
