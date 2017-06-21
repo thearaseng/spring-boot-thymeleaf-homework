@@ -8,5 +8,6 @@ public interface UserRepository {
 
 	ArrayList<User> getAllUsers();
 	User addUser(User user);
+	String[] getRoles();
 	
 }

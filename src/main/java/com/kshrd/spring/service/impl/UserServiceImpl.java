@@ -24,4 +24,9 @@ public class UserServiceImpl implements com.kshrd.spring.service.UserService {
 		return userRepository.addUser(user);
 	}
 
+	@Override
+	public String[] getRoles(){
+		return userRepository.getRoles();
+	}
+	
 }
