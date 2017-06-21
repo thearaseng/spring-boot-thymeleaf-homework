@@ -8,6 +8,5 @@ public interface UserRepository {
 
 	ArrayList<User> getAllUsers();
 	User addUser(User user);
-	User updateUser(User user);
 	
 }

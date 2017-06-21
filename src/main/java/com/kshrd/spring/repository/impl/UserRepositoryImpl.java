@@ -23,10 +23,5 @@ public class UserRepositoryImpl implements UserRepository {
 	public User addUser(User user) {
 		return database.addUser(user);
 	}
-
-	@Override
-	public User updateUser(User user) {
-		return database.updateUser(user);
-	}
 	
 }
