@@ -14,21 +14,27 @@
 </ol>
 
 <div class="card">
-<div class="card-header bg-white">
-  <div class="media">
-    <div class="media-body">
-      <h4 class="card-title">Roles</h4>
-      <p class="card-subtitle">User Roles</p>
-    </div>
+  <div class="card-header bg-white center">
+    <h5 class="card-title">Total User Roles <span class="text-primary" th:text="${ROLES.size()}"></span></h5>
   </div>
-</div>
-<ul class="list-group list-group-fit m-b-0">
-  <li class="list-group-item" th:each="role : ${ROLES}">
-    <div class="media">
-      <div class="media-body media-middle" th:text="${role}"></div>
-    </div>
-  </li>
-  </ul>
+  <table class="table table-striped m-b-0">
+    <thead>
+      <tr class="text-uppercase small">
+        <th>Role ID</th>
+        <th>Role Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="role : ${ROLES}">
+        <td class="vertical-middle">
+          <span class="text-orange bold" th:text="${role.id}"></span>
+        </td>
+        <td class="vertical-middle">
+          <span class="text-orange bold" th:text="${role.roleName}"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 </div>
