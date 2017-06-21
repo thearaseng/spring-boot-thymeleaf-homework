@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kshrd.spring.data.Database;
+import com.kshrd.spring.model.Role;
 import com.kshrd.spring.model.User;
 import com.kshrd.spring.repository.UserRepository;
 
@@ -26,7 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return database.addUser(user);
 	}
 	@Override
-	public List<String> getRoles(){
+	public List<Role> getRoles(){
 		return database.getRoles();
 	}
 	

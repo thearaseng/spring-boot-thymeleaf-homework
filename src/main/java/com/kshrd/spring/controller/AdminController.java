@@ -50,4 +50,10 @@ public class AdminController {
 		return "admin/role-list";
 	}
 	
+	@RequestMapping("/admin/role-cu")
+	public String roleCU(Model model){
+//		model.addAttribute("ROLE", )
+		return "admin/role-cu";
+	}
+	
 }

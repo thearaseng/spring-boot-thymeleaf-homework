@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.kshrd.spring.model.Role;
 import com.kshrd.spring.model.User;
 
 public class Database {
 
 	private ArrayList<User> users = new ArrayList<>();
-	private List<String> roles = Arrays.asList("admin", "moderator", "user", "dba");
+	private List<Role> roles = new ArrayList<>();
 	
 	public ArrayList<User> getUsers(){
 		return users;
@@ -20,7 +21,7 @@ public class Database {
 		return user;
 	}
 	
-	public List<String> getRoles(){
+	public List<Role> getRoles(){
 		return roles;
 	}
 	

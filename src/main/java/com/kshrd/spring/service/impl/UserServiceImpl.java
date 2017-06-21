@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kshrd.spring.model.Role;
 import com.kshrd.spring.model.User;
 import com.kshrd.spring.repository.UserRepository;
 
@@ -26,7 +27,7 @@ public class UserServiceImpl implements com.kshrd.spring.service.UserService {
 	}
 
 	@Override
-	public List<String> getRoles(){
+	public List<Role> getRoles(){
 		return userRepository.getRoles();
 	}
 	
