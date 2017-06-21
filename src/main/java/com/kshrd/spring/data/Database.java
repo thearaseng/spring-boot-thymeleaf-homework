@@ -22,15 +22,4 @@ public class Database {
 		return user;
 	}
 	
-	public User updateUser(User user){
-		users.set(users.indexOf(findUser(user.getId())), user);
-		return user;
-	}
-	
-	private User findUser(int id){
-		for(User user : users){
-			if(user.getId() == id) return user;
-		}
-		return null;
-	}
 }
