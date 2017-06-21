@@ -6,6 +6,7 @@ import com.kshrd.spring.model.User;
 public class Database {
 
 	private ArrayList<User> users = new ArrayList<>();
+	private String[] roles = {"admin", "moderator", "user", "dba"};
 	
 	public ArrayList<User> getUsers(){
 		return users;
@@ -14,6 +15,10 @@ public class Database {
 	public User addUser(User user){
 		users.add(user);
 		return user;
+	}
+	
+	public String[] getRoles(){
+		return roles;
 	}
 	
 }
