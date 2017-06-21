@@ -34,6 +34,7 @@ public class AdminController {
 	@RequestMapping("/admin/user-cu")
 	public String userCU(Model model){
 		model.addAttribute("USER", new User());
+		model.addAttribute("ROLES", userService.getRoles());
 		return "/admin/user-cu";
 	}
 	

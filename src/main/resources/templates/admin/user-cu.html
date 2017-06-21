@@ -62,7 +62,9 @@
           <div class="col-sm-8">
             <div class="row">
               <div class="col-md-9">
-                <input type="text" class="form-control" placeholder="User Role" th:field="*{role}">
+                <select class="form-control" th:field="*{role}">
+                	<option th:each="role : ${ROLES}" th:value="${role}" th:text="${role}"></option>
+                </select>
               </div>
             </div>
           </div>
