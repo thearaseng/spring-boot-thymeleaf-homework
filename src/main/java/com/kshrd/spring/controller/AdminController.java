@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kshrd.spring.model.Role;
 import com.kshrd.spring.model.User;
 import com.kshrd.spring.service.UserService;
 
@@ -52,8 +53,14 @@ public class AdminController {
 	
 	@RequestMapping("/admin/role-cu")
 	public String roleCU(Model model){
-//		model.addAttribute("ROLE", )
+		model.addAttribute("ROLE", new Role());
 		return "admin/role-cu";
+	}
+	
+	@RequestMapping(value="/api/role/create", method=RequestMethod.POST)
+	@ResponseBody
+	public Role userCreate(@ModelAttribute Role role){
+		return role;
 	}
 	
 }
