@@ -1,6 +1,7 @@
 package com.kshrd.spring.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements com.kshrd.spring.service.UserService {
 	}
 
 	@Override
-	public String[] getRoles(){
+	public List<String> getRoles(){
 		return userRepository.getRoles();
 	}
 	

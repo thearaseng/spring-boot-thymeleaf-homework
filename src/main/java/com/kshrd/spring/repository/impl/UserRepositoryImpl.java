@@ -1,6 +1,8 @@
 package com.kshrd.spring.repository.impl;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return database.addUser(user);
 	}
 	@Override
-	public String[] getRoles(){
+	public List<String> getRoles(){
 		return database.getRoles();
 	}
 	
