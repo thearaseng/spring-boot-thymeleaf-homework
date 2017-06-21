@@ -23,11 +23,9 @@
   </div>
 </div>
 <ul class="list-group list-group-fit m-b-0">
-  <li class="list-group-item">
+  <li class="list-group-item" th:each="role : ${ROLES}">
     <div class="media">
-      <div class="media-body media-middle">
-        User Roles
-      </div>
+      <div class="media-body media-middle" th:text="${role}"></div>
     </div>
   </li>
   </ul>
