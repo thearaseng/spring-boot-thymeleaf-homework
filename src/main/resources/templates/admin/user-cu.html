@@ -63,7 +63,7 @@
             <div class="row">
               <div class="col-md-9">
                 <select class="form-control" th:field="*{role}">
-                	<option th:each="role : ${ROLES}" th:value="${role}" th:text="${role}"></option>
+                	<option th:each="role : ${ROLES}" th:value="${role.id}" th:text="${role.roleName}"></option>
                 </select>
               </div>
             </div>

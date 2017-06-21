@@ -22,7 +22,7 @@
       <tr class="text-uppercase small">
         <th>Profile</th>
         <th>Id</th>
-        <th>Role</th>
+        <th>Role Id</th>
       </tr>
     </thead>
     <tbody>
@@ -32,14 +32,14 @@
             <div class="media-left">
               <img th:src="${user.profile}" alt="" width="80" class="img-rounded">
             </div>
-            <div class="media-body media-middle" th:text="${user.name}"></div>
+            <div class="media-body media-middle" th:text="${user.name}" style="width: 120px;"></div>
           </div>
         </td>
-        <td class="center vertical-middle">
+        <td class="vertical-middle">
           <span class="text-orange bold" th:text="${user.id}"></span>
         </td>
-        <td class="center vertical-middle">
-          <span class="text-orange bold" th:text="${user.role}"></span>
+        <td class="vertical-middle">
+          <span class="text-orange bold" th:text="${user.role.roleName}"></span>
         </td>
       </tr>
     </tbody>
