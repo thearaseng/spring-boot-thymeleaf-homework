@@ -30,7 +30,7 @@
         <td>
           <div class="media">
             <div class="media-left">
-              <img th:src="@{/resources/img/} + ${user.profile}" alt="" width="80" class="img-rounded">
+              <img th:src="${user.profile}" alt="" width="80" class="img-rounded">
             </div>
             <div class="media-body media-middle" th:text="${user.name}"></div>
           </div>

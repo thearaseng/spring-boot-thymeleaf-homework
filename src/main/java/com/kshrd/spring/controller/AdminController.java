@@ -28,4 +28,10 @@ public class AdminController {
 		return "/admin/user-list";
 	}
 	
+	@RequestMapping("/admin/user-cu")
+	public String userCU(Model model){
+		model.addAttribute("USER", new User());
+		return "/admin/user-cu";
+	}
+	
 }
