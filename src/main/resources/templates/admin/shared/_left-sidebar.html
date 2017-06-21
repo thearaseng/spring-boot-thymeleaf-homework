@@ -1,25 +1,33 @@
 <!-- Sidebar -->
 <div class="sidebar sidebar-left sidebar-light sidebar-visible-md-up si-si-3 ls-top-navbar-xs-up sidebar-transparent-md" id="sidebarLeft" data-scrollable>
+  <div class="sidebar-heading" th:text="#{user} + ' | ' + #{role}"></div>
+  <ul class="sidebar-menu">
+    <li class="sidebar-menu-item">
+      <a class="sidebar-menu-button" th:href="@{/admin/dashboard}">
+        <i class="sidebar-menu-icon material-icons">dashboard</i><span th:text="#{dashboard}"></span>
+      </a>
+    </li>
+  </ul>
   <div class="sidebar-heading">User | Role</div>
   <ul class="sidebar-menu">
     <li class="sidebar-menu-item">
       <a class="sidebar-menu-button" th:href="@{/admin/user-cu}">
-        <i class="sidebar-menu-icon material-icons">account_box</i>Create User
-      </a>
-    </li>
-    <li class="sidebar-menu-item">
-      <a class="sidebar-menu-button" th:href="@{/admin/user-cu}">
-        <i class="sidebar-menu-icon material-icons">account_box</i>User List
+        <i class="sidebar-menu-icon material-icons">account_box</i><span th:text="#{create_user}"></span>
       </a>
     </li>
     <li class="sidebar-menu-item">
       <a class="sidebar-menu-button" th:href="@{/admin/user-list}">
-        <i class="sidebar-menu-icon material-icons">supervisor_account</i>Create Role
+        <i class="sidebar-menu-icon material-icons">account_box</i><span th:text="#{user_list}"></span>
       </a>
     </li>
     <li class="sidebar-menu-item">
-      <a class="sidebar-menu-button" th:href="@{/admin/user-list}">
-        <i class="sidebar-menu-icon material-icons">supervisor_account</i>Role List
+      <a class="sidebar-menu-button" th:href="@{/admin/role-cu}">
+        <i class="sidebar-menu-icon material-icons">supervisor_account</i><span th:text="#{create_role}"></span>
+      </a>
+    </li>
+    <li class="sidebar-menu-item">
+      <a class="sidebar-menu-button" th:href="@{/admin/role-list}">
+        <i class="sidebar-menu-icon material-icons">supervisor_account</i><span th:text="#{role_list}"></span>
       </a>
     </li>
   </ul>
