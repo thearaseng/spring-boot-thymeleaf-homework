@@ -80,7 +80,7 @@ public class AdminController {
 		return new ModelAndView("redirect:/admin/user-list");
 	}
 	
-	@RequestMapping(value="/api/user/{userHash}/delete", method=RequestMethod.DELETE)
+	@RequestMapping(value="/api/user/{userHash}/delete", method=RequestMethod.GET)
 	public ModelAndView deleteUser(@PathVariable String userHash){
 		userService.deleteUser(userHash);
 		return new ModelAndView("redirect:/admin/user-list");
