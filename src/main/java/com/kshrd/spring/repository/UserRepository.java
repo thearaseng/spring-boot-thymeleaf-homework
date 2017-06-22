@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.kshrd.spring.model.User;
@@ -70,7 +71,6 @@ public interface UserRepository {
 			+ "	email, "
 			+ "	gender, "
 			+ "	phone_number, "
-			+ "	user_hash, "
 			+ "	password, "
 			+ "	role_id, "
 			+ "	profile_url"
@@ -86,16 +86,16 @@ public interface UserRepository {
 			+ ")")
 	public boolean addUser(@Param("user") User user);
 	
-//	@Update("UPDATE users SET "
-//			+ "use_name=#{user.username},"
-//			+ "email=#{user.email},"
-//			+ "gender=#{user.password},"
-//			+ "phone_number=#{user.gender}"
-//			+ "phone_number=#{user.gender}"
-//			+ "phone_number=#{user.gender}"
-//			+ "phone_number=#{user.gender}"
-//			+ " WHERE user_hash=#{user.userHash}")
-	public boolean updateUser(User user);
+	@Update("UPDATE users SET "
+			+ "user_name=#{user.userName}, "
+			+ "email=#{user.email}, "
+			+ "gender=#{user.gender}, "
+			+ "phone_number=#{user.phoneNumber}, "
+			+ "password=#{user.password}, "
+			+ "role_id=#{user.role.id}, "
+			+ "profile_url=#{user.profileUrl}"
+			+ " WHERE user_hash = #{user.userHash}")
+	public boolean updateUser(@Param("user") User user);
 	
 	@Delete("DELETE FROM users WHERE user_hash=#{user_hash}")
 	public boolean deleteUser(String user_hash);

@@ -96,6 +96,12 @@ public class AdminController {
 		return new ModelAndView("redirect:/admin/user-list");
 	}
 	
+	@RequestMapping(value="/api/user/update", method=RequestMethod.POST)
+	public ModelAndView deleteUser(@ModelAttribute User user){
+		userService.updateUser(user);
+		return new ModelAndView("redirect:/admin/user-list");
+	}
+	
 	@RequestMapping("/admin/role-list")
 	public String roleList(Model model){
 		model.addAttribute("ROLES", roleService.getRoles());

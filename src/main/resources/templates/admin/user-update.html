@@ -10,7 +10,7 @@
 
 <ol class="breadcrumb">
   <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
-  <li class="active"><a th:href="@{/admin/user-cu}">Create User</a></li>
+  <li class="active"><a th:href="@{/admin/user-update}" th:text="${USER.userName}"></a></li>
 </ol>
 
 <div class="card">
@@ -21,7 +21,7 @@
   </ul>
   <div class="p-a-2 tab-content">
     <div class="tab-pane active" id="first">
-      <form th:action="@{/api/user/create}" method="POST" class="form-horizontal" th:object="${USER}">
+      <form th:action="@{/api/user/update}" method="POST" class="form-horizontal" th:object="${USER}">
         
         <div class="form-group row">
           <label for="name" class="col-sm-3 form-control-label" th:text="#{user_hash}"></label>
@@ -29,6 +29,7 @@
             <div class="row">
               <div class="col-md-9">
                 <input type="text" class="form-control" th:placeholder="#{user_hash}" th:field="*{userHash}" disabled="disabled">
+                <input type="hidden" th:field="*{userHash}">
               </div>
             </div>
           </div>
