@@ -48,17 +48,10 @@ public class AdminController {
 		return new ModelAndView("redirect:/admin/user-list");
 	}
 	
-//	@RequestMapping("/admin/role-list")
-//	public String roleList(Model model){
-////		model.addAttribute("ROLES", userService.getRoles());
-//		return "admin/role-list";
-//	}
-	
 	@RequestMapping("/admin/role-list")
-	@ResponseBody
-	public List<Role> roleList(){
-//		model.addAttribute("ROLES", userService.getRoles());
-		return roleService.getRoles();
+	public String roleList(Model model){
+		model.addAttribute("ROLES", roleService.getRoles());
+		return "admin/role-list";
 	}
 	
 	@RequestMapping("/admin/role-cu")
