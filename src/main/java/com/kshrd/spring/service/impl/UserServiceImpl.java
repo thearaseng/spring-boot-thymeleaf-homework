@@ -1,34 +1,50 @@
 package com.kshrd.spring.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.kshrd.spring.model.Role;
 import com.kshrd.spring.model.User;
 import com.kshrd.spring.repository.UserRepository;
+import com.kshrd.spring.service.UserService;
 
 @Service
-public class UserServiceImpl implements com.kshrd.spring.service.UserService {
+public class UserServiceImpl implements UserService {
 
-	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	public UserServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+	
 	@Override
-	public ArrayList<User> getAllUsers() {
-		return userRepository.getAllUsers();
+	public List<User> getUsers() {
+		return userRepository.getUsers();
 	}
 
 	@Override
-	public User addUser(User user) {
-		return userRepository.addUser(user);
+	public User getUserByHash(String userHash) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<Role> getRoles(){
-		return userRepository.getRoles();
+	public boolean addUser(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateUser(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteUser(String userHash) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

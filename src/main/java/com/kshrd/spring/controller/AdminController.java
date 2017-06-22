@@ -1,6 +1,7 @@
 package com.kshrd.spring.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,15 +28,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/user-list")
-	public String userList(Model model){
-		model.addAttribute("USERS", userService.getAllUsers());
-		return "/admin/user-list";
+	@ResponseBody
+	public List<User> userList(Model model){
+//		model.addAttribute("USERS", userService.getAllUsers());
+//		return "/admin/user-list";
+		return userService.getUsers();
 	}
 	
 	@RequestMapping("/admin/user-cu")
 	public String userCU(Model model){
 		model.addAttribute("USER", new User());
-		model.addAttribute("ROLES", userService.getRoles());
+//		model.addAttribute("ROLES", userService.getRoles());
 		return "/admin/user-cu";
 	}
 	
@@ -47,7 +50,7 @@ public class AdminController {
 	
 	@RequestMapping("/admin/role-list")
 	public String roleList(Model model){
-		model.addAttribute("ROLES", userService.getRoles());
+//		model.addAttribute("ROLES", userService.getRoles());
 		return "admin/role-list";
 	}
 	

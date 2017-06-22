@@ -4,8 +4,9 @@ public class User {
 
 	private int id;
 	private String userName, email, gender, phoneNumber, userHash, password, profileUrl;
-	private int roleId;
 	private boolean status;
+	private Role role;
+	
 	public int getId() {
 		return id;
 	}
@@ -54,17 +55,17 @@ public class User {
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
 	}
-	public int getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
 	public boolean isStatus() {
 		return status;
 	}
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 }
