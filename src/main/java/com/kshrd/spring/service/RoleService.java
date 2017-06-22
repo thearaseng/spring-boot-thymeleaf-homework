@@ -8,4 +8,6 @@ public interface RoleService {
 
 	List<Role> getRoles();
 	
+	boolean addRole(Role role);
+	
 }

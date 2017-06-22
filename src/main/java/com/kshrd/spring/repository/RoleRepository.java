@@ -2,6 +2,8 @@ package com.kshrd.spring.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -17,5 +19,8 @@ public interface RoleRepository {
 			@Result(property="roleName" , column="role_name")
 	})
 	List<Role> getRoles();
+	
+	@Insert("INSERT INTO role (role_name) VALUES (#{role.roleName})")
+	public boolean addRole(@Param("role") Role role);
 	
 }

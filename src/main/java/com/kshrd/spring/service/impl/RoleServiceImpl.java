@@ -24,4 +24,13 @@ public class RoleServiceImpl implements RoleService {
 		return roleRepository.getRoles();
 	}
 	
+	@Override
+	public boolean addRole(Role role){
+		if(roleRepository.addRole(role)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 }

@@ -117,9 +117,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/api/role/create", method=RequestMethod.POST)
-	@ResponseBody
-	public Role userCreate(@ModelAttribute Role role){
-		return role;
+	public ModelAndView userCreate(@ModelAttribute Role role){
+		roleService.addRole(role);
+		return new ModelAndView("redirect:/admin/role-list");
 	}
 	
 	@RequestMapping("/test")
