@@ -2,6 +2,7 @@ package com.kshrd.spring.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -36,7 +37,19 @@ public interface UserRepository {
 	})
 	public List<User> getUsers();
 	
-	public User getUserByHash(String userHash);
+	@Select("SELECT * FROM users U"
+			+ " JOIN role R ON U.role_id = R.id"
+			+ " WHERE user_hash = #{user_hash}")
+	@Results(value={
+			@Result(property="userName" , column="user_name"),
+			@Result(property="phoneNumber" , column="phone_number"),
+			@Result(property="userHash" , column="user_hash"),
+			@Result(property="profileUrl" , column="profile_url"),
+			@Result(property="userHash" , column="user_hash"),
+			@Result(property="role.id", column="role_id"),
+			@Result(property="role.roleName", column="role_name")
+	})
+	public User getUserByHash(@Param("user_hash") String userHash);
 	
 	public boolean addUser(User user);
 	

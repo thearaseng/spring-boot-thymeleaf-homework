@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import com.kshrd.spring.model.Role;
-import com.kshrd.spring.model.User;
 
 @Repository
 public interface RoleRepository {

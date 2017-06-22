@@ -25,8 +25,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserByHash(String userHash) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.getUserByHash(userHash);
 	}
 
 	@Override
