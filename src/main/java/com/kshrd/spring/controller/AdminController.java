@@ -24,7 +24,8 @@ public class AdminController {
 	private RoleService roleService;
 	
 	@RequestMapping("/admin/dashboard")
-	public String dashboard(){
+	public String dashboard(Model model){
+		model.addAttribute("USERS", userService.getUsers());
 		return "admin/dashboard";
 	}
 	

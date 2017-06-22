@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.kshrd.spring.model.User;
@@ -87,9 +88,19 @@ public interface UserRepository {
 			+ ")")
 	public boolean addUser(@Param("user") User user);
 	
+//	@Update("UPDATE users SET "
+//			+ "use_name=#{user.username},"
+//			+ "email=#{user.email},"
+//			+ "gender=#{user.password},"
+//			+ "phone_number=#{user.gender}"
+//			+ "phone_number=#{user.gender}"
+//			+ "phone_number=#{user.gender}"
+//			+ "phone_number=#{user.gender}"
+//			+ " WHERE user_hash=#{user.userHash}")
 	public boolean updateUser(User user);
 	
 	@Delete("DELETE FROM users WHERE user_hash=#{user_hash}")
 	public boolean deleteUser(String user_hash);
+	
 	
 }
