@@ -1,7 +1,5 @@
 package com.kshrd.spring.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.kshrd.spring.model.Role;
 import com.kshrd.spring.model.User;
@@ -59,32 +56,6 @@ public class AdminController {
 		return "admin/user-update";
 	}
 	
-//	@RequestMapping(value="/api/user/create", method=RequestMethod.POST)
-//	public ModelAndView userCreate(@ModelAttribute User user){
-//		userService.addUser(user);
-//		return new ModelAndView("redirect:/admin/user-list");
-//	}
-	
-//	@RequestMapping(value="/api/user/create", method=RequestMethod.GET)
-//	@ResponseBody
-//	public User userCreate(/*@ModelAttribute User user*/){
-//		User user = new User();
-//		user.setEmail("gmail");
-//		user.setGender("m");
-//		user.setPassword("123");
-//		user.setPhoneNumber("3232323");
-//		user.setProfileUrl("asfdasdfsadfsadfsdafsdfsdfsadf");
-//		user.setStatus(true);
-//		user.setUserHash("adfasdfsdafasdfasdfsdfsdf");
-//		user.setUserName("Testing Name");
-//		Role r = new Role();
-//		r.setId(3);
-//		r.setRoleName("testing");
-//		user.setRole(r);
-//		userService.addUser(user);
-//		return user;
-//	}
-	
 	@RequestMapping(value="/api/user/create", method=RequestMethod.POST)
 	public ModelAndView userCreate(@ModelAttribute User user){
 		user.setUserHash("fasdfsadfsdafsadfsdafsdafflksjdflksajdlkfjsdalkf");
@@ -121,11 +92,5 @@ public class AdminController {
 		roleService.addRole(role);
 		return new ModelAndView("redirect:/admin/role-list");
 	}
-	
-	@RequestMapping("/test")
-	@ResponseBody
-	public int test(){
-		return userService.countAllUsers();
-	}
-	
+
 }

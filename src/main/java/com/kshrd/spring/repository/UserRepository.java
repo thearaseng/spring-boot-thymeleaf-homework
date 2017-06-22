@@ -54,18 +54,6 @@ public interface UserRepository {
 	})
 	public User getUserByHash(@Param("user_hash") String userHash);
 	
-//	@Insert("INSERT INTO users (user_name, email, gender, phone_number, status, user_hash, password, profile_url) VALUES("
-//			+ "#{user.userName, }"
-//			+ "#{user.email, }"
-//			+ "#{user.gender, }"
-//			+ "#{user.phoneNumber, }"
-//			+ "#{user.status, }"
-//			+ "#{user.userHash, }"
-//			+ "#{user.password, }"
-//			+ "#{user.profileUrl}"
-//			+ ")")
-//	public boolean addUser(@Param("user") User user);
-	
 	@Insert("INSERT INTO users ("
 			+ "	user_name, "
 			+ "	email, "
@@ -105,6 +93,5 @@ public interface UserRepository {
 	
 	@Select("SELECT COUNT(*) FROM users WHERE gender = #{gender}")
 	public int countUsersByGender(@Param("gender") String gender);
-	
 	
 }

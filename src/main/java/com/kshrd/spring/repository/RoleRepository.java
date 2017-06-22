@@ -21,6 +21,6 @@ public interface RoleRepository {
 	List<Role> getRoles();
 	
 	@Insert("INSERT INTO role (role_name) VALUES (#{role.roleName})")
-	public boolean addRole(@Param("role") Role role);
+	boolean addRole(@Param("role") Role role);
 	
 }

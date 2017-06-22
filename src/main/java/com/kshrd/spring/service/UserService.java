@@ -8,13 +8,13 @@ public interface UserService {
 
 public List<User> getUsers();
 	
-	public User getUserByHash(String userHash);
+	User getUserByHash(String userHash);
 	
-	public boolean addUser(User user);
+	boolean addUser(User user);
 	
-	public boolean updateUser(User user);
+	boolean updateUser(User user);
 	
-	public boolean deleteUser(String userHash);
+	boolean deleteUser(String userHash);
 	
 	int countUsersByGender(String gender);
 	
