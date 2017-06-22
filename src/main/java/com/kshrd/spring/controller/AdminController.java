@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kshrd.spring.model.Role;
 import com.kshrd.spring.model.User;
+import com.kshrd.spring.service.RoleService;
 import com.kshrd.spring.service.UserService;
 
 @Controller
@@ -19,6 +20,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 	
 	@RequestMapping("/admin/dashboard")
 	public String dashboard(){
@@ -44,10 +48,17 @@ public class AdminController {
 		return new ModelAndView("redirect:/admin/user-list");
 	}
 	
+//	@RequestMapping("/admin/role-list")
+//	public String roleList(Model model){
+////		model.addAttribute("ROLES", userService.getRoles());
+//		return "admin/role-list";
+//	}
+	
 	@RequestMapping("/admin/role-list")
-	public String roleList(Model model){
+	@ResponseBody
+	public List<Role> roleList(){
 //		model.addAttribute("ROLES", userService.getRoles());
-		return "admin/role-list";
+		return roleService.getRoles();
 	}
 	
 	@RequestMapping("/admin/role-cu")
