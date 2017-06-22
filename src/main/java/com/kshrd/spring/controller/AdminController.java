@@ -47,6 +47,13 @@ public class AdminController {
 		return "admin/user-detail";
 	}
 	
+	@RequestMapping("/admin/user/{userHash}/update")
+	public String userUpdate(@PathVariable String userHash, Model model){
+		model.addAttribute("USER", userService.getUserByHash(userHash));
+		model.addAttribute("ROLES", roleService.getRoles());
+		return "admin/user-update";
+	}
+	
 //	@RequestMapping(value="/api/user/create", method=RequestMethod.POST)
 //	public ModelAndView userCreate(@ModelAttribute User user){
 //		userService.addUser(user);

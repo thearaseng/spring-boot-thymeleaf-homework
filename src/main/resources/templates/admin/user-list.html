@@ -27,6 +27,7 @@
         <th th:text="#{phone_number}"></th>
         <th th:text="#{status}"></th>
         <th th:text="#{role}"></th>
+        <th th:text="#{action}"></th>
       </tr>
     </thead>
     <tbody>
@@ -56,6 +57,11 @@
         </td>
         <td class="vertical-middle">
           <span class="text-orange bold" th:text="${user.role.roleName}"></span>
+        </td>
+        <td class="vertical-middle">
+          <a th:href="@{/admin/user/{userHash}/detail(userHash=${user.userHash})}" class="btn btn-primary">Detail</a>
+          <a th:href="@{/admin/user/{userHash}/update(userHash=${user.userHash})}" class="btn btn-warning">Update</a>
+          <a th:href="@{/api/user/{userHash}/delete(userHash=${user.userHash})}" class="btn btn-danger">Delete</a>
         </td>
       </tr>
     </tbody>
