@@ -37,7 +37,7 @@
           <div class="col-sm-8">
             <div class="row">
               <div class="col-md-9">
-                <input type="text" class="form-control" th:placeholder="#{user_name}" th:field="*{name}">
+                <input type="text" class="form-control" th:placeholder="#{user_name}" th:field="*{userName}">
               </div>
             </div>
           </div>
@@ -52,7 +52,50 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="https://www.cdn.image.com/" th:field="*{profile}">
+                <input type="text" class="form-control" placeholder="https://www.cdn.image.com/" th:field="*{profileUrl}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="name" class="col-sm-3 form-control-label" th:text="#{email}"></label>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-md-9">
+                <input type="text" class="form-control" th:placeholder="#{email}" th:field="*{email}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="name" class="col-sm-3 form-control-label" th:text="#{password}"></label>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-md-9">
+                <input type="password" class="form-control" th:placeholder="#{password}" th:field="*{password}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="name" class="col-sm-3 form-control-label" th:text="#{gender}"></label>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-md-9">
+                <select class="form-control" th:field="*{gender}">
+                	<option value="F">Female</option>
+                	<option value="M">Male</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="name" class="col-sm-3 form-control-label" th:text="#{phone_number}"></label>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-md-9">
+                <input type="text" class="form-control" th:placeholder="#{phone_number}" th:field="*{phoneNumber}">
               </div>
             </div>
           </div>
@@ -62,7 +105,7 @@
           <div class="col-sm-8">
             <div class="row">
               <div class="col-md-9">
-                <select class="form-control" th:field="*{role}">
+                <select class="form-control" th:field="*{role.id}">
                 	<option th:each="role : ${ROLES}" th:value="${role.id}" th:text="${role.roleName}"></option>
                 </select>
               </div>

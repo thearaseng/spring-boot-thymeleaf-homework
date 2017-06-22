@@ -30,8 +30,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean addUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		if(userRepository.addUser(user)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
@@ -42,8 +45,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean deleteUser(String userHash) {
-		// TODO Auto-generated method stub
-		return false;
+		if(userRepository.deleteUser(userHash)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 }

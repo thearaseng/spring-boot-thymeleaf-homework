@@ -2,10 +2,13 @@ package com.kshrd.spring.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.springframework.stereotype.Repository;
 
 import com.kshrd.spring.model.User;
@@ -51,10 +54,42 @@ public interface UserRepository {
 	})
 	public User getUserByHash(@Param("user_hash") String userHash);
 	
-	public boolean addUser(User user);
+//	@Insert("INSERT INTO users (user_name, email, gender, phone_number, status, user_hash, password, profile_url) VALUES("
+//			+ "#{user.userName, }"
+//			+ "#{user.email, }"
+//			+ "#{user.gender, }"
+//			+ "#{user.phoneNumber, }"
+//			+ "#{user.status, }"
+//			+ "#{user.userHash, }"
+//			+ "#{user.password, }"
+//			+ "#{user.profileUrl}"
+//			+ ")")
+//	public boolean addUser(@Param("user") User user);
+	
+	@Insert("INSERT INTO users ("
+			+ "	user_name, "
+			+ "	email, "
+			+ "	gender, "
+			+ "	phone_number, "
+			+ "	user_hash, "
+			+ "	password, "
+			+ "	role_id, "
+			+ "	profile_url"
+			+ "	) VALUES ("
+			+ "	#{user.userName},"
+			+ "	#{user.email},"
+			+ "	#{user.gender},"
+			+ "	#{user.status}, "
+			+ "	#{user.userHash},"
+			+ "	#{user.password},"
+			+ "	#{user.role.id},"
+			+ "	#{user.profileUrl}"
+			+ ")")
+	public boolean addUser(@Param("user") User user);
 	
 	public boolean updateUser(User user);
 	
-	public boolean deleteUser(String userHash);
+	@Delete("DELETE FROM users WHERE user_hash=#{user_hash}")
+	public boolean deleteUser(String user_hash);
 	
 }

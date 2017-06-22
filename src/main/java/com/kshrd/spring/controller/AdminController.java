@@ -37,7 +37,7 @@ public class AdminController {
 	@RequestMapping("/admin/user-cu")
 	public String userCU(Model model){
 		model.addAttribute("USER", new User());
-//		model.addAttribute("ROLES", userService.getRoles());
+		model.addAttribute("ROLES", roleService.getRoles());
 		return "/admin/user-cu";
 	}
 	
@@ -47,9 +47,42 @@ public class AdminController {
 		return "admin/user-detail";
 	}
 	
+//	@RequestMapping(value="/api/user/create", method=RequestMethod.POST)
+//	public ModelAndView userCreate(@ModelAttribute User user){
+//		userService.addUser(user);
+//		return new ModelAndView("redirect:/admin/user-list");
+//	}
+	
+//	@RequestMapping(value="/api/user/create", method=RequestMethod.GET)
+//	@ResponseBody
+//	public User userCreate(/*@ModelAttribute User user*/){
+//		User user = new User();
+//		user.setEmail("gmail");
+//		user.setGender("m");
+//		user.setPassword("123");
+//		user.setPhoneNumber("3232323");
+//		user.setProfileUrl("asfdasdfsadfsadfsdafsdfsdfsadf");
+//		user.setStatus(true);
+//		user.setUserHash("adfasdfsdafasdfasdfsdfsdf");
+//		user.setUserName("Testing Name");
+//		Role r = new Role();
+//		r.setId(3);
+//		r.setRoleName("testing");
+//		user.setRole(r);
+//		userService.addUser(user);
+//		return user;
+//	}
+	
 	@RequestMapping(value="/api/user/create", method=RequestMethod.POST)
 	public ModelAndView userCreate(@ModelAttribute User user){
+		user.setUserHash("fasdfsadfsdafsadfsdafsdafflksjdflksajdlkfjsdalkf");
 		userService.addUser(user);
+		return new ModelAndView("redirect:/admin/user-list");
+	}
+	
+	@RequestMapping(value="/api/user/{userHash}/delete", method=RequestMethod.DELETE)
+	public ModelAndView deleteUser(@PathVariable String userHash){
+		userService.deleteUser(userHash);
 		return new ModelAndView("redirect:/admin/user-list");
 	}
 	
