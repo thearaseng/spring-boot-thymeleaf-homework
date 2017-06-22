@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="bootstrap-layout"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="/admin/admin-layout">
+
+<body>
+
+<div layout:fragment="content">
+
+<ol class="breadcrumb">
+  <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
+  <li class="active">
+	  <a th:href="@{/admin/user/{userHash}/detail(userHash=${USER.userHash})}" th:text="${USER.userName}">
+	  </a>
+  </li>
+</ol>
+
+<div class="jumbotron hidden-md-down">
+  <div class="media">
+    <div class="media-left">
+      <img th:src="${USER.profileUrl}" alt="profile" class="img-circle" width="130">
+    </div>
+    <div class="media-body media-middle">
+      <h4 class="m-b-0" th:text="${USER.userName}"></h4>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header bg-white">
+    <h4 class="card-title">User Detail</h4>
+  </div>
+  <table class="table text-subhead v-middle">
+    <tbody>
+      <tr>
+        <td>
+          <div class="label label-default" th:text="#{user_id}"></div>
+        </td>
+        <td th:text="${USER.id}"></td>
+        <td>
+          <div class="label label-default" th:text="#{email}"></div>
+        </td>
+        <td th:text="${USER.email}"></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="label label-default" th:text="#{gender}"></div>
+        </td>
+        <td th:text="${USER.gender}"></td>
+        <td>
+          <div class="label label-default" th:text="#{phone_number}"></div>
+        </td>
+        <td th:text="${USER.phoneNumber}"></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="label label-default" th:text="#{status}"></div>
+        </td>
+        <td th:text="${USER.status}"></td>
+        <td>
+          <div class="label label-default" th:text="#{role}"></div>
+        </td>
+        <td th:text="${USER.role.roleName}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+</body>
+
+</html>

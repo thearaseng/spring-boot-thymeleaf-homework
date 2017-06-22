@@ -42,9 +42,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/user/{userHash}/detail")
-	@ResponseBody
-	public User userDetail(@PathVariable String userHash){
-		return userService.getUserByHash(userHash);
+	public String userDetail(@PathVariable String userHash, Model model){
+		model.addAttribute("USER", userService.getUserByHash(userHash));
+		return "admin/user-detail";
 	}
 	
 	@RequestMapping(value="/api/user/create", method=RequestMethod.POST)
