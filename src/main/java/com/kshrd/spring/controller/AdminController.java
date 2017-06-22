@@ -1,8 +1,6 @@
 package com.kshrd.spring.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +26,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/user-list")
-	@ResponseBody
-	public List<User> userList(Model model){
-//		model.addAttribute("USERS", userService.getAllUsers());
-//		return "/admin/user-list";
-		return userService.getUsers();
+	public String userList(Model model){
+		model.addAttribute("USERS", userService.getUsers());
+		return "/admin/user-list";
 	}
 	
 	@RequestMapping("/admin/user-cu")
