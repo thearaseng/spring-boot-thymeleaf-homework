@@ -8,8 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.kshrd.spring.model.User;
@@ -80,7 +78,7 @@ public interface UserRepository {
 			+ "	#{user.userName},"
 			+ "	#{user.email},"
 			+ "	#{user.gender},"
-			+ "	#{user.status}, "
+			+ "	#{user.phoneNumber}, "
 			+ "	#{user.userHash},"
 			+ "	#{user.password},"
 			+ "	#{user.role.id},"
