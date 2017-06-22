@@ -27,7 +27,9 @@ public class AdminController {
 	
 	@RequestMapping("/admin/dashboard")
 	public String dashboard(Model model){
-		model.addAttribute("USERS", userService.getUsers());
+		model.addAttribute("TOTAL_USER", userService.countAllUsers());
+		model.addAttribute("MALE_USER", userService.countUsersByGender("M"));
+		model.addAttribute("FEMALE_USER", userService.countUsersByGender("F"));
 		return "admin/dashboard";
 	}
 	
@@ -118,6 +120,12 @@ public class AdminController {
 	@ResponseBody
 	public Role userCreate(@ModelAttribute Role role){
 		return role;
+	}
+	
+	@RequestMapping("/test")
+	@ResponseBody
+	public int test(){
+		return userService.countAllUsers();
 	}
 	
 }

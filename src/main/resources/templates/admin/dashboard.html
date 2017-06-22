@@ -19,7 +19,7 @@
         </div>
         <div class="media-body media-middle">
           <h4 class="card-title m-b-0" th:text="#{total_user}"></h4>
-          <span class="text-muted" th:text="${USERS.size()}"></span>
+          <span class="text-muted" th:text="${TOTAL_USER}"></span>
         </div>
       </div>
     </div>
@@ -37,13 +37,30 @@
           </a>
         </div>
         <div class="media-body media-middle">
-          <h4 class="card-title m-b-0" th:text="#{total_user}"></h4>
-          <span class="text-muted" th:text="${USERS.size()}"></span>
+          <h4 class="card-title m-b-0" th:text="#{female_user}"></h4>
+          <span class="text-muted" th:text="${FEMALE_USER}"></span>
         </div>
       </div>
     </div>
     <div class="card-footer center"">
-      <a href="instructor-quiz.html" class="btn btn-primary btn-sm pull-xs-left" th:text="#{user_list}" th:href="@{/admin/user-list}"></a>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-block">
+      <div class="media m-b-05">
+        <div class="media-left media-middle">
+          <a href="instructor-quiz.html">
+            <i class="material-icons img-rounded">account_circle</i>
+          </a>
+        </div>
+        <div class="media-body media-middle">
+          <h4 class="card-title m-b-0" th:text="#{male_user}"></h4>
+          <span class="text-muted" th:text="${MALE_USER}"></span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer center"">
       <div class="clearfix"></div>
     </div>
   </div>

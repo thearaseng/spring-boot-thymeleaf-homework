@@ -55,4 +55,14 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
+	@Override
+	public int countUsersByGender(String gender){
+		return userRepository.countUsersByGender(gender);
+	}
+	
+	@Override
+	public int countAllUsers(){
+		return userRepository.countAllUsers();
+	}
+	
 }

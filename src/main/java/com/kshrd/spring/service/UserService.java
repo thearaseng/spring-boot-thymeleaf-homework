@@ -16,4 +16,8 @@ public List<User> getUsers();
 	
 	public boolean deleteUser(String userHash);
 	
+	int countUsersByGender(String gender);
+	
+	int countAllUsers();
+	
 }

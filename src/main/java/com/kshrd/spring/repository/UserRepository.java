@@ -100,5 +100,11 @@ public interface UserRepository {
 	@Delete("DELETE FROM users WHERE user_hash=#{user_hash}")
 	public boolean deleteUser(String user_hash);
 	
+	@Select("SELECT COUNT(*) FROM users")
+	public int countAllUsers();
+	
+	@Select("SELECT COUNT(*) FROM users WHERE gender = #{gender}")
+	public int countUsersByGender(@Param("gender") String gender);
+	
 	
 }
