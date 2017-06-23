@@ -25,8 +25,8 @@
         <i class="material-icons">&#xE894;</i>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-list" aria-labelledby="Preview">
-        <a class="dropdown-item" href="account-edit.html"><i class="material-icons md-18">lock</i> <span class="icon-text">Edit Account</span></a>
-        <a class="dropdown-item" href="profile.html"><i class="material-icons md-18">person</i> <span class="icon-text">Public Profile</span></a>
+        <a class="dropdown-item" th:href="@{''(lang='kh')}"><img style="width: 25px;" alt="khmer language" th:src="@{https://cdn.countryflags.com/thumbs/cambodia/flag-button-round-250.png}"> <span class="icon-text" th:text="#{khmer_lang}"></span></a>
+        <a class="dropdown-item" th:href="@{''(lang='en')}"><img style="width: 25px;" alt="english language" th:src="@{https://cdn.pixabay.com/photo/2013/07/13/12/03/flag-159070_960_720.png}"> <span class="icon-text" th:text="#{en_lang}"></span></a>
       </div>
     </li>
     <!-- // END User dropdown -->
