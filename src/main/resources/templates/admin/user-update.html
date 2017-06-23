@@ -93,6 +93,19 @@
           </div>
         </div>
         <div class="form-group row">
+          <label for="name" class="col-sm-3 form-control-label" th:text="#{status}"></label>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-md-9">
+                <select class="form-control" th:field="*{status}">
+                	<option value="1">True</option>
+                	<option value="0"">False</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
           <label for="name" class="col-sm-3 form-control-label" th:text="#{phone_number}"></label>
           <div class="col-sm-8">
             <div class="row">

@@ -81,6 +81,7 @@ public interface UserRepository {
 			+ "gender=#{user.gender}, "
 			+ "phone_number=#{user.phoneNumber}, "
 			+ "password=#{user.password}, "
+			+ "status=#{user.status}, "
 			+ "role_id=#{user.role.id}, "
 			+ "profile_url=#{user.profileUrl}"
 			+ " WHERE user_hash = #{user.userHash}")
