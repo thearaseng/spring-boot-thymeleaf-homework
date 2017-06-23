@@ -29,7 +29,7 @@ public interface UserRepository {
 			+ " R.id AS role_id,"
 			+ " R.role_name"
 			+ " FROM "
-			+ "	users U INNER JOIN role R ON U.role_id = R.id")
+			+ "	users U INNER JOIN role R ON U.role_id = R.id ORDER BY U.id")
 	@Results(value={
 			@Result(property="userName" , column="user_name"),
 			@Result(property="userHash" , column="user_hash"),
