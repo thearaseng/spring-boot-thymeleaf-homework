@@ -1,6 +1,7 @@
 package com.kshrd.spring.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean addUser(User user) {
+		user.setUserHash(UUID.randomUUID().toString());
 		if(userRepository.addUser(user)){
 			return true;
 		}else{

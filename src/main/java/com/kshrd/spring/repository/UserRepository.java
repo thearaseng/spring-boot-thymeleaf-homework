@@ -59,6 +59,7 @@ public interface UserRepository {
 			+ "	email, "
 			+ "	gender, "
 			+ "	phone_number, "
+			+ "	user_hash, "
 			+ "	password, "
 			+ "	role_id, "
 			+ "	profile_url"
