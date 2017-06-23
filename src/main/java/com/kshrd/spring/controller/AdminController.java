@@ -58,7 +58,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/api/user/create", method=RequestMethod.POST)
 	public ModelAndView userCreate(@ModelAttribute User user){
-		user.setUserHash("fasdfsadfsdafsadfsdafsdafflksjdflksajdlkfjsdalkf");
 		userService.addUser(user);
 		return new ModelAndView("redirect:/admin/user-list");
 	}
