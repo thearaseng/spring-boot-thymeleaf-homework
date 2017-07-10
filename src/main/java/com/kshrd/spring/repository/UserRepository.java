@@ -1,99 +1,147 @@
 package com.kshrd.spring.repository;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.kshrd.spring.entity.Role;
+import com.kshrd.spring.entity.User;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
-import com.kshrd.spring.model.User;
+import java.util.List;
 
 @Repository
 public interface UserRepository {
 
-	@Select("SELECT "
-			+ "	U.id, "
-			+ "	U.user_name, "
-			+ "	U.email, "
-			+ "	U.password, "
-			+ "	U.gender, "
-			+ "	U.user_hash,"
-			+ "	U.profile_url,"
-			+ "	U.phone_number,"
-			+ "	U.status,"
-			+ " R.id AS role_id,"
-			+ " R.role_name"
-			+ " FROM "
-			+ "	users U INNER JOIN role R ON U.role_id = R.id ORDER BY U.id")
-	@Results(value={
-			@Result(property="userName" , column="user_name"),
-			@Result(property="userHash" , column="user_hash"),
-			@Result(property="profileUrl" , column="profile_url"),
-			@Result(property="phoneNumber" , column="phone_number"),
-			@Result(property="role.id", column="role_id"),
-			@Result(property="role.roleName", column="role_name")
-	})
-	public List<User> getUsers();
+	@Select("SELECT" +
+				" id," +
+				" username," +
+				" email," +
+				" password," +
+				" dob," +
+				" gender," +
+				" device," +
+				" remark," +
+				" status," +
+				" uuid" +
+			" FROM" +
+				" users" +
+			" WHERE" +
+				" status = '1'")
+	@Results(
+		value = {
+				@Result(property = "id", column = "id"),
+				@Result(property = "roles", column = "id", many = @Many(select = "findRolesById"))
+		}
+	)
+	public List<User> findAllUser();
 	
-	@Select("SELECT * FROM users U"
-			+ " JOIN role R ON U.role_id = R.id"
-			+ " WHERE user_hash = #{user_hash}")
-	@Results(value={
-			@Result(property="userName" , column="user_name"),
-			@Result(property="phoneNumber" , column="phone_number"),
-			@Result(property="userHash" , column="user_hash"),
-			@Result(property="profileUrl" , column="profile_url"),
-			@Result(property="userHash" , column="user_hash"),
-			@Result(property="role.id", column="role_id"),
-			@Result(property="role.roleName", column="role_name")
-	})
-	public User getUserByHash(@Param("user_hash") String userHash);
-	
-	@Insert("INSERT INTO users ("
-			+ "	user_name, "
-			+ "	email, "
-			+ "	gender, "
-			+ "	phone_number, "
-			+ "	user_hash, "
-			+ "	password, "
-			+ "	role_id, "
-			+ "	profile_url"
-			+ "	) VALUES ("
-			+ "	#{user.userName},"
-			+ "	#{user.email},"
-			+ "	#{user.gender},"
-			+ "	#{user.phoneNumber}, "
-			+ "	#{user.userHash},"
-			+ "	#{user.password},"
-			+ "	#{user.role.id},"
-			+ "	#{user.profileUrl}"
-			+ ")")
-	public boolean addUser(@Param("user") User user);
-	
-	@Update("UPDATE users SET "
-			+ "user_name=#{user.userName}, "
-			+ "email=#{user.email}, "
-			+ "gender=#{user.gender}, "
-			+ "phone_number=#{user.phoneNumber}, "
-			+ "password=#{user.password}, "
-			+ "status=#{user.status}, "
-			+ "role_id=#{user.role.id}, "
-			+ "profile_url=#{user.profileUrl}"
-			+ " WHERE user_hash = #{user.userHash}")
+	@Select("SELECT" +
+				" id," +
+				" name," +
+				" remark," +
+				" status," +
+				" uuid" +
+			" FROM" +
+				" roles r" +
+			" JOIN user_roles ur" +
+			" ON ur.role_id = r. ID" +
+			" WHERE" +
+				" ur.user_id = #{userid}")
+	public List<Role> findRolesById(@Param("userid") int userid);
+
+	@Select("SELECT" +
+				" id," +
+				" username," +
+				" email," +
+				" password," +
+				" dob," +
+				" gender," +
+				" device," +
+				" remark," +
+				" status," +
+				" uuid" +
+			" FROM" +
+				" users" +
+			" WHERE" +
+				" status = '1' AND uuid = #{uuid}")
+	@Results(
+		value = {
+				@Result(property = "id", column = "id"),
+				@Result(property = "roles", column = "id", many = @Many(select = "findRolesById"))
+		}
+	)
+	public User findUserByUUID(@Param("uuid") String uuid);
+
+	@Select("SELECT id FROM users WHERE uuid = #{uuid}")
+	public int getUserIDByUUID(@Param("uuid") String uuid);
+
+	@Update("UPDATE users SET " +
+				"username = #{user.username}, " +
+				"email = #{user.email}, " +
+				"password = #{user.password}, " +
+				"dob = #{user.dob}, " +
+				"gender = #{user.gender}, " +
+				"device = #{user.device}, " +
+				"remark = #{user.remark}, " +
+				"status = #{user.status}" +
+			" WHERE " +
+				"uuid = #{user.uuid}")
 	public boolean updateUser(@Param("user") User user);
 	
-	@Delete("DELETE FROM users WHERE user_hash=#{user_hash}")
-	public boolean deleteUser(String user_hash);
+	@Update("UPDATE users SET status = #{status} WHERE uuid = #{uuid}")
+	public boolean updateUserStatusByUUID(@Param("uuid") String uuid, @Param("status") String status);
+
+	@Delete("DELETE FROM users WHERE uuid = #{uuid}")
+	public boolean deleteUserByUUID(@Param("uuid") String uuid);
 	
-	@Select("SELECT COUNT(*) FROM users")
-	public int countAllUsers();
-	
-	@Select("SELECT COUNT(*) FROM users WHERE gender = #{gender}")
-	public int countUsersByGender(@Param("gender") String gender);
+	@Insert("INSERT INTO users(" +
+				"username, " +
+				"email, " +
+				"password, " +
+				"dob, " +
+				"gender, " +
+				"device, " +
+				"remark, " +
+				"status, " +
+				"uuid) " +
+			"VALUES (" +
+				"#{user.username}, " +
+				"#{user.email}, " +
+				"#{user.password}, " +
+				"#{user.dob}, " +
+				"#{user.gender}, " +
+				"#{user.device}, " +
+				"#{user.remark}, " +
+				"#{user.status}, " +
+				"#{user.uuid})")
+	@SelectKey(
+		statement = "SELECT last_value FROM users_id_seq",
+		keyProperty = "user.id",
+		keyColumn = "last_value",
+		before=false,
+		resultType=int.class
+	)
+	public boolean insertUser(@Param("user") User user);
+
+	@Select("SELECT" +
+				" id," +
+				" username," +
+				" email," +
+				" password," +
+				" dob," +
+				" gender," +
+				" device," +
+				" remark," +
+				" status," +
+				" uuid" +
+			" FROM" +
+				" users" +
+			" WHERE" +
+				" status = '1' AND email = #{email}")
+	@Results(
+		value = {
+				@Result(property = "id", column = "id"),
+				@Result(property = "roles", column = "id", many = @Many(select = "findRolesById"))
+		}
+	)
+	public User findUserByEmail(@Param("email") String email);
 	
 }

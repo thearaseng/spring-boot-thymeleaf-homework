@@ -1,70 +1,63 @@
 package com.kshrd.spring.service.impl;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.kshrd.spring.model.User;
+import com.kshrd.spring.entity.User;
 import com.kshrd.spring.repository.UserRepository;
 import com.kshrd.spring.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	private UserRepository userRepository;
+	UserRepository userRepository;
 	
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-	
+
 	@Override
-	public List<User> getUsers() {
-		return userRepository.getUsers();
+	public List<User> findAllUser() {
+		return userRepository.findAllUser();
 	}
 
 	@Override
-	public User getUserByHash(String userHash) {
-		return userRepository.getUserByHash(userHash);
+	public User findUserByUUID(String uuid) {
+		return userRepository.findUserByUUID(uuid);
 	}
 
 	@Override
-	public boolean addUser(User user) {
-		user.setUserHash(UUID.randomUUID().toString());
-		if(userRepository.addUser(user)){
-			return true;
-		}else{
-			return false;
-		}
+	public int getUserIDByUUID(String uuid) {
+		return userRepository.getUserIDByUUID(uuid);
 	}
 
 	@Override
 	public boolean updateUser(User user) {
-		if(userRepository.updateUser(user)){
-			return true;
-		}else{
-			return false;
-		}
+		return userRepository.updateUser(user);
 	}
 
 	@Override
-	public boolean deleteUser(String userHash) {
-		if(userRepository.deleteUser(userHash)){
-			return true;
-		}else{
-			return false;
-		}
+	public boolean updateUserStatusByUUID(String uuid, String status) {
+		return userRepository.updateUserStatusByUUID(uuid, status);
 	}
-	
+
 	@Override
-	public int countUsersByGender(String gender){
-		return userRepository.countUsersByGender(gender);
+	public boolean deleteUserByUUID(String uuid) {
+		return userRepository.deleteUserByUUID(uuid);
 	}
-	
+
 	@Override
-	public int countAllUsers(){
-		return userRepository.countAllUsers();
+	public boolean insertUser(User user) {
+		user.setUuid(UUID.randomUUID().toString());
+		return userRepository.insertUser(user);
 	}
-	
+
+	@Override
+	public User findUserByEmail(String email) {
+		return userRepository.findUserByEmail(email);
+	}
+
 }

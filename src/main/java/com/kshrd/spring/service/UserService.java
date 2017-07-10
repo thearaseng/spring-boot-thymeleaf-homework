@@ -1,23 +1,26 @@
 package com.kshrd.spring.service;
 
-import java.util.List;
 
-import com.kshrd.spring.model.User;
+import com.kshrd.spring.entity.User;
+
+import java.util.List;
 
 public interface UserService {
 
-public List<User> getUsers();
-	
-	User getUserByHash(String userHash);
-	
-	boolean addUser(User user);
-	
-	boolean updateUser(User user);
-	
-	boolean deleteUser(String userHash);
-	
-	int countUsersByGender(String gender);
-	
-	int countAllUsers();
-	
+	public List<User> findAllUser();
+
+	public User findUserByUUID(String uuid);
+
+	public int getUserIDByUUID(String uuid);
+
+	public boolean updateUser(User user);
+
+	public boolean updateUserStatusByUUID(String uuid, String status);
+
+	public boolean deleteUserByUUID(String uuid);
+
+	public boolean insertUser(User user);
+
+	public User findUserByEmail(String email);
+
 }
