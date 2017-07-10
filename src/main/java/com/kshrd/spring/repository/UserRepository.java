@@ -25,13 +25,12 @@ public interface UserRepository {
 				" users" +
 			" WHERE" +
 				" status = '1'")
-	@Results(
-		value = {
-				@Result(property = "id", column = "id"),
-				@Result(property = "roles", column = "id", many = @Many(select = "findRolesById"))
+	@Results(value = {
+			@Result(property = "id", column = "id"),
+			@Result(property = "roles", column = "id", many = @Many(select = "findRolesById"))
 		}
 	)
-	public List<User> findAllUser();
+	public List<User> findAllUsers();
 	
 	@Select("SELECT" +
 				" id," +

@@ -5,7 +5,7 @@ import com.kshrd.spring.response.*;
 import com.kshrd.spring.response.failure.ResponseListFailure;
 import com.kshrd.spring.response.failure.ResponseRecordFailure;
 import com.kshrd.spring.service.UserService;
-import com.kshrd.spring.service.UserRoleService;
+import com.kshrd.spring.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,30 +19,35 @@ import java.util.List;
 public class UserRestControllerV1 {
 
 	UserService userService;
-	UserRoleService userRoleService;
+	RoleService userRoleService;
 
-	HttpStatus httpStatus = HttpStatus.OK;
+	HttpStatus httpStatus;
 	
 	@Autowired
-	public UserRestControllerV1(UserService userService, UserRoleService userRoleService) {
+	public UserRestControllerV1(UserService userService, RoleService userRoleService) {
 		this.userService = userService;
 		this.userRoleService = userRoleService;
 	}
 
-	@GetMapping("/find-all-user")
-	public ResponseEntity<ResponseList<User>> findAllUser(@RequestParam("page") int page, @RequestParam("limit") int limit){
+	@GetMapping("/find-all-users")
+	public ResponseEntity<ResponseList<User>> findAllUsers(@RequestParam("page") int page, @RequestParam("limit") int limit){
 		ResponseList<User> responseList = new ResponseList<>();
+		
 		try{
-			Pagination1 pagination = new Pagination1();
+
+			httpStatus = HttpStatus.OK;
+			List<User> users = userService.findAllUsers();
+			
+			Pagination pagination = new Pagination();
 			pagination.setLimit(limit);
 			pagination.setPage(page);
+			pagination.setTotalCount(users.size());
 			pagination.setOffset((page - 1) * limit);
-			List<User> users = userService.findAllUser();
+			System.out.println("Offset is " + pagination.getOffset());
+			
 			if(!users.isEmpty()){
-				Pagination1 p = new Pagination1(page, limit, users.size(), users.size());
 				responseList = new ResponseList<User>(HttpMessage.success(Table.USERS, Transaction.Success.RETRIEVE),
-													true, users, new Pagination1(p.getPage(), p.getLimit(),
-													p.getTotalCount(), p.totalPages()));
+													true, users, pagination);
 			} else {
 				httpStatus = HttpStatus.NOT_FOUND;
 				responseList = new ResponseListFailure<>(HttpMessage.fail(Table.USERS, Transaction.Fail.RETRIEVE), false,
@@ -159,21 +164,22 @@ public class UserRestControllerV1 {
 	public ResponseEntity<ResponseRecord<User>> insertUser(@RequestBody User user){
 		ResponseRecord<User> responseRecord = null;
 		try{
+			httpStatus = HttpStatus.OK;
 			if(userService.insertUser(user)){
 				userRoleService.insertUserRole(user.getRoles(), userService.getUserIDByUUID(user.getUuid()));
-				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USER_ROLES, Transaction.Success.CREATED), 
+				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USERS, Transaction.Success.CREATED), 
 						 												true, userService.findUserByUUID(user.getUuid()));
 			}
 			else{
-				httpStatus = HttpStatus.NOT_FOUND;
+				httpStatus = HttpStatus.BAD_REQUEST;
 				responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USERS, Transaction.Fail.CREATED),  
-																				false, ResponseHttpStatus.NOT_FOUND);
+																				false, ResponseHttpStatus.BAD_REQUEST);
 			}				
 			
 		}catch(Exception e){
 			e.printStackTrace();
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USER_ROLES, Transaction.Fail.CREATED), 
+			responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USERS, Transaction.Fail.CREATED), 
 														 				true, ResponseHttpStatus.INTERNAL_SERVER_ERROR);
 		}
 

@@ -4,7 +4,7 @@ import com.kshrd.spring.entity.Role;
 
 import java.util.List;
 
-public interface UserRoleService {
+public interface RoleService {
 
 	public boolean insertUserRole(List<Role> roles, int userId);
 

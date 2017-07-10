@@ -10,7 +10,6 @@ public class ResponseRecordFailure<T> extends ResponseRecord<T> {
 	
 	public ResponseRecordFailure() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ResponseRecordFailure(String message, boolean status, ResponseHttpStatus error) {

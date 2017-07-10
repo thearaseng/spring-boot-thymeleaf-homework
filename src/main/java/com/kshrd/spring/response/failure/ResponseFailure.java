@@ -19,7 +19,6 @@ public  class ResponseFailure<T> extends Response<T> {
 		this.setError(new Error(error));
 	}
 
-	
 	public static class Error {
 
 		private int code;

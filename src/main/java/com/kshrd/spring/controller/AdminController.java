@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kshrd.spring.service.RoleService;
+import com.kshrd.spring.service.UserService;
+
 @Controller
 public class AdminController {
 	
-//	@Autowired
-//	private UserService userService;
-//	
-//	@Autowired
-//	private RoleService roleService;
-//	
-//	@RequestMapping("/admin/dashboard")
-//	public String dashboard(Model model){
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping("/admin/dashboard")
+	public String dashboard(Model model){
 //		model.addAttribute("TOTAL_USER", userService.countAllUsers());
 //		model.addAttribute("MALE_USER", userService.countUsersByGender("M"));
 //		model.addAttribute("FEMALE_USER", userService.countUsersByGender("F"));
-//		return "admin/dashboard";
-//	}
-//	
+		return "admin/dashboard";
+	}
+	
 //	@RequestMapping("/admin/user-list")
 //	public String userList(Model model){
 //		model.addAttribute("USERS", userService.getUsers());

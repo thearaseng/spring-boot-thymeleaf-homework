@@ -6,14 +6,12 @@ package com.kshrd.spring.response;
  *	Created Date: 2017/07/03
  *
  */
-public class ResponseRecord<T> extends Response{
+public class ResponseRecord<T> extends Response<T>{
 	/*
 	 * Response record class using with single object
 	 */
 	private T data;
 
-	
-	
 	public ResponseRecord() {
 		super();
 		// TODO Auto-generated constructor stub

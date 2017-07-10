@@ -15,7 +15,7 @@ public class ResponseList<T> extends Response {
 
 	private List<T> data;
 	
-	private Pagination1 pagination;
+	private Pagination pagination;
 	
 	public ResponseList() {
 		super();
@@ -23,7 +23,7 @@ public class ResponseList<T> extends Response {
 	}
 
 	
-	public ResponseList(String message, boolean status, List<T> data,Pagination1 pagination) {
+	public ResponseList(String message, boolean status, List<T> data,Pagination pagination) {
 		super(message, status);
 		this.data = data;
 		this.pagination = pagination;
@@ -46,14 +46,14 @@ public class ResponseList<T> extends Response {
 	/**
 	 * @return the pagination
 	 */
-	public Pagination1 getPagination() {
+	public Pagination getPagination() {
 		return pagination;
 	}
 
 	/**
 	 * @param pagination the pagination to set
 	 */
-	public void setPagination(Pagination1 pagination) {
+	public void setPagination(Pagination pagination) {
 		this.pagination = pagination;
 	}
 

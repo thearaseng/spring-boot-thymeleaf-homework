@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-	public List<User> findAllUser();
+	public List<User> findAllUsers();
 
 	public User findUserByUUID(String uuid);
 

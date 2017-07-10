@@ -2,20 +2,20 @@ package com.kshrd.spring.service.impl;
 
 
 import com.kshrd.spring.entity.Role;
-import com.kshrd.spring.repository.UserRoleRepository;
-import com.kshrd.spring.service.UserRoleService;
+import com.kshrd.spring.repository.RoleRepository;
+import com.kshrd.spring.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserRoleServiceImpl implements UserRoleService {
+public class UserRoleServiceImpl implements RoleService {
 
-	UserRoleRepository userRoleRepository;
+	RoleRepository userRoleRepository;
 
 	@Autowired
-	public UserRoleServiceImpl(UserRoleRepository userRoleRepository) {
+	public UserRoleServiceImpl(RoleRepository userRoleRepository) {
 		this.userRoleRepository = userRoleRepository;
 	}
 

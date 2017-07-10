@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRoleRepository {
+public interface RoleRepository {
 
 	@Insert("<script>INSERT INTO user_roles" +
 			" VALUES" +
