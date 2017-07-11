@@ -1,6 +1,6 @@
  package com.kshrd.spring.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +21,7 @@ public class User{
 	private String remark;
 	private String status;
 	
-	private List<Role> roles; // One user has many roles 
+	private List<Role> roles;
 
 	public User() {}
 

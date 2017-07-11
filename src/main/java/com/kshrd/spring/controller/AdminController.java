@@ -31,6 +31,12 @@ public class AdminController {
 //		model.addAttribute("USERS", userService.getUsers());
 //		return "/admin/user-list";
 //	}
+	
+	@RequestMapping("/admin/user-list")
+	public String userList(){
+		return "/admin/user-list";
+	}
+	
 //	
 //	@RequestMapping("/admin/user-cu")
 //	public String userCU(Model model){

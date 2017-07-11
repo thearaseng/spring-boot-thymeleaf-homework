@@ -1,22 +1,22 @@
 package com.kshrd.spring.entity.form;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kshrd.spring.entity.Role;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class UserAddForm {
 
-    private String username;
+	private String username;
     private String email;
     private String password;
     private Date dob;
     private String gender;
-    private String device;
     private String remark;
-    private String status;
-
+    @JsonIgnore
+    private String uuid;
     private List<Role> roles;
 
     public String getUsername() {
@@ -59,14 +59,6 @@ public class UserAddForm {
         this.gender = gender;
     }
 
-    public String getDevice() {
-        return device;
-    }
-
-    public void setDevice(String device) {
-        this.device = device;
-    }
-
     public String getRemark() {
         return remark;
     }
@@ -75,12 +67,12 @@ public class UserAddForm {
         this.remark = remark;
     }
 
-    public String getStatus() {
-        return status;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public List<Role> getRoles() {

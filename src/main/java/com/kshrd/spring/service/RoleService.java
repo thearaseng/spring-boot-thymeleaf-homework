@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface RoleService {
 
-	public boolean insertUserRole(List<Role> roles, int userId);
-
-	public boolean deleteUserRoleByUserId(String uuid);
+	public List<Role> findAllRole();
 
 }
