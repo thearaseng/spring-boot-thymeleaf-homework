@@ -1,13 +1,11 @@
 package com.kshrd.spring.service;
 
-import java.util.List;
+import com.kshrd.spring.entity.Role;
 
-import com.kshrd.spring.model.Role;
+import java.util.List;
 
 public interface RoleService {
 
-	List<Role> getRoles();
-	
-	boolean addRole(Role role);
-	
+	public List<Role> findAllRole();
+
 }

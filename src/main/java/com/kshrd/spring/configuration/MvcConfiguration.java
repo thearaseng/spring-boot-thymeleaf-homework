@@ -16,7 +16,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override

@@ -1,23 +1,36 @@
 package com.kshrd.spring.service;
 
-import java.util.List;
 
-import com.kshrd.spring.model.User;
+import com.kshrd.spring.entity.Role;
+import com.kshrd.spring.entity.User;
+import com.kshrd.spring.entity.form.UserAddForm;
+import com.kshrd.spring.entity.form.UserUpdateForm;
+import com.kshrd.spring.response.Pagination;
+
+import java.util.List;
 
 public interface UserService {
 
-public List<User> getUsers();
+	public List<User> findAllUser(Pagination pagination);
+
+	public User findUserByUUID(String uuid);
+
+	public int getUserIDByUUID(String uuid);
+
+	public int getUserCount();
+
+	public boolean updateUser(UserUpdateForm userUpdateForm);
+
+	public boolean updateUserStatusByUUID(String uuid, String status);
+
+	public boolean deleteUserByUUID(String uuid);
+
+	public boolean insertUser(UserAddForm userAddForm);
+
+	public User findUserByEmail(String email);
 	
-	User getUserByHash(String userHash);
+	public boolean insertUserRole(List<Role> role, int userId);
 	
-	boolean addUser(User user);
-	
-	boolean updateUser(User user);
-	
-	boolean deleteUser(String userHash);
-	
-	int countUsersByGender(String gender);
-	
-	int countAllUsers();
-	
+	public boolean deleteUserRoleByUserUuid(String uuid);
+
 }

@@ -13,60 +13,358 @@
   <li class="active"><a th:href="@{/admin/user-list}">Users</a></li>
 </ol>
 
-<div class="card">
-  <div class="card-header bg-white center">
-    <h5 class="card-title">Total Users <span class="text-primary" th:text="${USERS.size()}"></span></h5>
+<div class="box">
+        <div class="box-header with-border">
+            <a href="#" class="btn btn-success btn-sm" id="btAdd"><i class="fa fa-fw fa-plus-square-o"></i> Add More</a>
+        </div>
+  <div class="padding">
+    <div class="box">
+      <div class="box-header">
+        <h2 th:text="#{users}"></h2>
+      </div>
+      <div class="box-body">
+        <table class="table table-bordered">
+          <thead>
+           <tr>
+            <th>#</th>
+            <th th:text="#{username}"></th>
+            <th th:text="#{email}"></th>
+            <th th:text="#{password}"></th>
+            <th th:text="#{dob}"></th>
+            <th th:text="#{gender}"></th>
+            <th th:text="#{device}"></th>
+            <th th:text="#{remark}"></th>
+            <th th:text="#{status}"></th>
+            <th th:text="#{role}"></th>
+            <th th:text="#{action}"></th>
+           </tr>
+          </thead>
+          <tbody id="user_data">
+
+          </tbody>
+        </table>
+        <div id="pagination" class="pull-right">
+      </div>
+    </div>
   </div>
-  <table class="table table-striped m-b-0">
-    <thead>
-      <tr class="text-uppercase small">
-        <th th:text="#{profile}"></th>
-        <th th:text="#{user_id}"></th>
-        <th th:text="#{email}"></th>
-        <th th:text="#{gender}"></th>
-        <th th:text="#{phone_number}"></th>
-        <th th:text="#{status}"></th>
-        <th th:text="#{role}"></th>
-        <th th:text="#{action}"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="user : ${USERS}">
-        <td>
-          <div class="media">
-            <div class="media-left">
-              <img th:src="${user.profileUrl}" alt="" width="80" class="img-rounded">
-            </div>
-            <p th:text="${user.userName}"></p>
-          </div>
-        </td>
-        <td class="vertical-middle">
-          <span class="text-orange bold" th:text="${user.id}"></span>
-        </td>
-        <td class="vertical-middle">
-          <span class="text-orange bold" th:text="${user.email}"></span>
-        </td>
-        <td class="vertical-middle">
-          <span class="text-orange bold" th:text="${user.gender}"></span>
-        </td>
-        <td class="vertical-middle">
-          <span class="text-orange bold" th:text="${user.phoneNumber}"></span>
-        </td>
-        <td class="vertical-middle">
-          <span class="text-orange bold" th:text="${user.status}"></span>
-        </td>
-        <td class="vertical-middle">
-          <span class="text-orange bold" th:text="${user.role.roleName}"></span>
-        </td>
-        <td class="vertical-middle">
-          <a th:href="@{/admin/user/{userHash}/detail(userHash=${user.userHash})}" class="btn btn-primary" th:text="#{detail}"></a>
-          <a th:href="@{/admin/user/{userHash}/update(userHash=${user.userHash})}" class="btn btn-warning" th:text="#{update}"></a>
-          <a th:href="@{/api/user/{userHash}/delete(userHash=${user.userHash})}" class="btn btn-danger" th:text="#{delete}"></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+  <!-- ############ PAGE END-->
+
 </div>
+</div>
+    <!-- user detail -->
+    <div class="modal fade" id="userDetailModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">User Detail</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th style="width:50%">User Name: </th>
+                                <td id="username"> </td>
+                            </tr>
+                            <tr>
+                                <th>Email: </th>
+                                <td id="email"> </td>
+                            </tr>
+                            <tr>
+                                <th>DOB:</th>
+                                <td id="dob"> </td>
+                            </tr>
+                            <tr>
+                                <th>Gender:</th>
+                                <td id="gender"> </td>
+                            </tr>
+                            <tr>
+                                <th>Remark:</th>
+                                <td id="remark"> </td>
+                            </tr>
+                            <tr>
+                                <th>Status:</th>
+                                <td id="status"> </td>
+                            </tr>
+                            <tr>
+                                <th>Role:</th>
+                                <td id="role"> </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
+    <!-- User Update Modal  -->
+    <div class="modal fade" id="userEditModal">
+
+        <!-- form start -->
+        <form class="form-horizontal" id="userUpdateForm" action="#" method="PUI">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Update User</h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <!-- /.box-header -->
+
+                        <div class="box-body">
+
+                            <div class="row">
+                                <input type="hidden" class="form-control" id="uuid" placeholder="UUID">
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">User Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="username" placeholder="Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="email" placeholder="Remark">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="password" placeholder="Index">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">DOB</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="dob" placeholder="Index">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Gender</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control"  id="gender" placeholder="Gender">
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Remark</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="remark" placeholder="Index">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Status</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="status" placeholder="1">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Roles</label>
+                                    <div class="col-sm-10">
+                                        <div id="roleSelect">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+                </div>
+            <!-- /.modal-dialog -->
+        </form>
+
+    </div>
+    <!-- /.modal -->
+
+
+    <!-- User Add Modal  -->
+    <div class="modal fade" id="userAddModal">
+
+        <!-- form start -->
+        <form class="form-horizontal" id="userAddForm" action="#" method="POST">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Add User </h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">User Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="username" placeholder="Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="email" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="password" placeholder="Password">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">DOB</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="dob" placeholder="Date of Birth">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Gender</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control"  id="gender" placeholder="Gender">
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Remark</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="remark" placeholder="Remark">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Roles</label>
+                                    <div class="col-sm-10">
+                                        <div id="roleSelect">
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- /.box-body -->
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+
+        </form>
+
+
+    </div>
+    <!-- /.modal -->
+
+
+
+
+
+  <script type="text/x-jquery-impl" id="user_tmpl">
+    {{each(i, user) users}}
+        <tr>
+            <td>${i+1}</td>
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.password}</td>
+            <td>${user.dob}</td>
+            <td>${user.gender}</td>
+            <td>${user.device}</td>
+            <td>${user.remark}</td>
+            <td>
+                {{if status=='1'}}
+					<button type="button" id="btUpdateStatus" data-uuid=${user.uuid} data-status=0 class="btn btn-xs btn-success"><i class="fa fa-fw fa-check"></i></button>
+				{{else}}
+					<button type="button" id="btUpdateStatus" data-uuid=${user.uuid} data-status=1 class="btn btn-xs btn-danger"><i class="fa fa-fw fa-times"></i></button>
+				{{/if}}
+            </td>
+            <td>
+                {{each(i, role) user.roles}}
+                    <p>${role.name}</p>
+                {{/each}}
+            </td>
+            <td>
+                <a th:href="@{#view}" id="btDetail" data-uuid=${user.uuid}> <i class="fa fa-eye"></i> </a>
+				<a th:href="@{#edit}" id="btEdit" data-uuid=${user.uuid}> <i class="fa fa-pencil-square-o"></i></a>
+				<a th:href="@{#delete}" id="btDelete" data-uuid=${user.uuid}><i class="fa fa-trash-o"></i></a>
+            </td>
+    {{/each}}
+
+  </script>
 <script type="text/javascript">
 	document.getElementById('main-content').style.maxWidth = '1000000000000px';
 </script>
