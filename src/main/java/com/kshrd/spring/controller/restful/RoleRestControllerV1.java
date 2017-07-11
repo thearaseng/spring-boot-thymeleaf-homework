@@ -35,6 +35,7 @@ public class RoleRestControllerV1 {
     public ResponseEntity<ResponseList<Role>> findAllRole(){
         ResponseList<Role> responseList = new ResponseList<>();
         try{
+        	httpStatus = HttpStatus.OK;
             List<Role> roles = roleService.findAllRole();
             if(!roles.isEmpty()){
                 responseList = new ResponseList<Role>(HttpMessage.success(Table.ROLES, Transaction.Success.RETRIEVE),

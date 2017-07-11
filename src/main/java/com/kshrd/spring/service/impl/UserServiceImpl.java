@@ -49,12 +49,12 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(userUpdateForm.getEmail());
 		user.setPassword(userUpdateForm.getPassword());
 		user.setDob(userUpdateForm.getDob());
-		user.setGender(userUpdateForm.getGender());
 		user.setDevice(userUpdateForm.getDevice());
 		user.setUuid(userUpdateForm.getUuid());
 		user.setRemark(userUpdateForm.getRemark());
 		user.setStatus(userUpdateForm.getStatus());
 		user.setRoles(userUpdateForm.getRoles());
+		user.setGender(userUpdateForm.getGender());
 		return userRepository.updateUser(user);
 	}
 

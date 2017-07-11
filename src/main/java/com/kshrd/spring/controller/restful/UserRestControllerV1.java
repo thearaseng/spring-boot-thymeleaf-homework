@@ -43,6 +43,7 @@ public class UserRestControllerV1 {
 	){
 		ResponseList<User> responseList = new ResponseList<>();
 		try{
+			httpStatus = HttpStatus.OK;
 			Pagination pagination = new Pagination();
 			pagination.setLimit(limit);
 			pagination.setPage(page);
@@ -70,6 +71,7 @@ public class UserRestControllerV1 {
 	public ResponseEntity<ResponseRecord<User>> findUserByUUID(@PathVariable("uuid") String uuid){
 		ResponseRecord<User> responseRecord = new ResponseRecord<>();
 		try{
+			httpStatus = HttpStatus.OK;
 			User user = userService.findUserByUUID(uuid);
 			if(user!=null){
 				responseRecord = new ResponseRecord<User>(HttpMessage.success(Table.USERS, Transaction.Success.RETRIEVE), true, user);
@@ -91,6 +93,7 @@ public class UserRestControllerV1 {
 	public ResponseEntity<ResponseRecord<User>> updateUser(@RequestBody UserUpdateForm userUpdateForm){
 		ResponseRecord<User> responseRecord = null;
 		try{
+			httpStatus = HttpStatus.OK;
 			if(userService.updateUser(userUpdateForm)){
 				userService.deleteUserRoleByUserUuid(userUpdateForm.getUuid());
 				userService.insertUserRole(userUpdateForm.getRoles(), userService.getUserIDByUUID(userUpdateForm.getUuid()));
@@ -115,6 +118,7 @@ public class UserRestControllerV1 {
 																	   @PathVariable("status") String status){
 		ResponseRecord<User> responseRecord = null;
 		try{
+			httpStatus = HttpStatus.OK;
 			if(userService.updateUserStatusByUUID(uuid, status)){
 				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USER_ROLES, Transaction.Success.UPDATED), 
 						 													true, userService.findUserByUUID(uuid));
@@ -137,6 +141,7 @@ public class UserRestControllerV1 {
 	public ResponseEntity<ResponseRecord<User>> deleteUserByUUID(@PathVariable("uuid") String uuid){
 		ResponseRecord<User> responseRecord = null;
 		try{
+			httpStatus = HttpStatus.OK;
 			User user = userService.findUserByUUID(uuid);
 			userService.deleteUserRoleByUserUuid(user.getUuid());
 			if(userService.deleteUserByUUID(uuid)){
@@ -162,6 +167,7 @@ public class UserRestControllerV1 {
 	public ResponseEntity<ResponseRecord<User>> insertUser(@RequestBody UserAddForm userAddForm){
 		ResponseRecord<User> responseRecord = null;
 		try{
+			httpStatus = HttpStatus.OK;
 			if(userService.insertUser(userAddForm)){
 				userService.insertUserRole(userAddForm.getRoles(), userService.getUserIDByUUID(userAddForm.getUuid()));
 				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USER_ROLES, Transaction.Success.CREATED), 
@@ -187,6 +193,7 @@ public class UserRestControllerV1 {
 	public ResponseEntity<ResponseRecord<User>> findUserByEmail(@RequestParam("email") String email){
 		ResponseRecord<User> responseRecord = null;
 		try{
+			httpStatus = HttpStatus.OK;
 			User myUser = userService.findUserByEmail(email);
 			if(myUser != null){
 				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USER_ROLES, Transaction.Success.RETRIEVE), 
