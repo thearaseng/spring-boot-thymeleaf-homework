@@ -88,6 +88,30 @@ public class UserRestControllerV1 {
 		
 		return new ResponseEntity<ResponseRecord<User>>(responseRecord, httpStatus);
 	}
+	
+	@PutMapping(value = "/status/{uuid}/{status}", headers = "Accept=application/json")
+	public ResponseEntity<ResponseRecord<User>> updateUserStatusByUUID(@PathVariable("uuid") String uuid,
+																	   @PathVariable("status") String status){
+		ResponseRecord<User> responseRecord = null;
+		try{
+			httpStatus = HttpStatus.OK;
+			if(userService.updateUserStatusByUUID(uuid, status)){
+				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USER_ROLES, Transaction.Success.UPDATED), 
+						 													true, userService.findUserByUUID(uuid));
+			} else {
+				httpStatus = HttpStatus.NOT_FOUND;
+				responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USERS, Transaction.Fail.UPDATED),  
+																				false, ResponseHttpStatus.NOT_FOUND);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USER_ROLES, Transaction.Fail.UPDATED), 
+														 					true, ResponseHttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return new ResponseEntity<ResponseRecord<User>>(responseRecord, httpStatus);
+	}
 
 	@PutMapping(value = "/update", headers = "Accept=application/json")
 	public ResponseEntity<ResponseRecord<User>> updateUser(@RequestBody UserUpdateForm userUpdateForm){
@@ -108,30 +132,6 @@ public class UserRestControllerV1 {
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USER_ROLES, Transaction.Fail.UPDATED),
 														 true, ResponseHttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		return new ResponseEntity<ResponseRecord<User>>(responseRecord, httpStatus);
-	}
-
-	@PutMapping(value = "/status/{uuid}/{status}", headers = "Accept=application/json")
-	public ResponseEntity<ResponseRecord<User>> updateUserStatusByUUID(@PathVariable("uuid") String uuid,
-																	   @PathVariable("status") String status){
-		ResponseRecord<User> responseRecord = null;
-		try{
-			httpStatus = HttpStatus.OK;
-			if(userService.updateUserStatusByUUID(uuid, status)){
-				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USER_ROLES, Transaction.Success.UPDATED), 
-						 													true, userService.findUserByUUID(uuid));
-			} else {
-				httpStatus = HttpStatus.NOT_FOUND;
-				responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USERS, Transaction.Fail.UPDATED),  
-																				false, ResponseHttpStatus.NOT_FOUND);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USER_ROLES, Transaction.Fail.UPDATED), 
-														 					true, ResponseHttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		return new ResponseEntity<ResponseRecord<User>>(responseRecord, httpStatus);
@@ -161,32 +161,6 @@ public class UserRestControllerV1 {
 		}
 
 		return new ResponseEntity<ResponseRecord<User>>(responseRecord, httpStatus);
-	}	
-	
-	@PostMapping(value = "/insert", headers = "Accept=application/json")
-	public ResponseEntity<ResponseRecord<User>> insertUser(@RequestBody UserAddForm userAddForm){
-		ResponseRecord<User> responseRecord = null;
-		try{
-			httpStatus = HttpStatus.OK;
-			if(userService.insertUser(userAddForm)){
-				userService.insertUserRole(userAddForm.getRoles(), userService.getUserIDByUUID(userAddForm.getUuid()));
-				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USER_ROLES, Transaction.Success.CREATED), 
-						 												true, userService.findUserByUUID(userAddForm.getUuid()));
-			}
-			else{
-				httpStatus = HttpStatus.NOT_FOUND;
-				responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USERS, Transaction.Fail.CREATED),  
-																				false, ResponseHttpStatus.NOT_FOUND);
-			}				
-			
-		}catch(Exception e){
-			e.printStackTrace();
-			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USER_ROLES, Transaction.Fail.CREATED), 
-														 				true, ResponseHttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		return new ResponseEntity<ResponseRecord<User>>(responseRecord, httpStatus);
 	}
 	
 	@PostMapping(value = "/find-user-by-email", headers = "Accept=application/json")
@@ -209,6 +183,32 @@ public class UserRestControllerV1 {
 			e.printStackTrace();
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 			responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USER_ROLES, Transaction.Fail.RETRIEVE), 
+														 				true, ResponseHttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return new ResponseEntity<ResponseRecord<User>>(responseRecord, httpStatus);
+	}
+	
+	@PostMapping(value = "/insert", headers = "Accept=application/json")
+	public ResponseEntity<ResponseRecord<User>> insertUser(@RequestBody UserAddForm userAddForm){
+		ResponseRecord<User> responseRecord = null;
+		try{
+			httpStatus = HttpStatus.OK;
+			if(userService.insertUser(userAddForm)){
+				userService.insertUserRole(userAddForm.getRoles(), userService.getUserIDByUUID(userAddForm.getUuid()));
+				responseRecord = new ResponseRecord<>(HttpMessage.success(Table.USER_ROLES, Transaction.Success.CREATED), 
+						 												true, userService.findUserByUUID(userAddForm.getUuid()));
+			}
+			else{
+				httpStatus = HttpStatus.NOT_FOUND;
+				responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USERS, Transaction.Fail.CREATED),  
+																				false, ResponseHttpStatus.NOT_FOUND);
+			}				
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			responseRecord = new ResponseRecordFailure<>(HttpMessage.fail(Table.USER_ROLES, Transaction.Fail.CREATED), 
 														 				true, ResponseHttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
